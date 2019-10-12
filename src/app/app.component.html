@@ -4,18 +4,21 @@
   </div>
   <div>
     <div>Type in amount and select currency:</div>
-    <input #originalAmount="$event.target.value" type="text" id="amountToConvert" name="amountToConvert" [(ngModel)]="amountToConvert"
-      (change)="convertCurrency('originalCurrency', $event.target.value)" />
-    <select name="currencyList" (change)="convertCurrency('originalCurrency', originalAmount.value)">
-      <option #originalCurrency *ngFor="let currency of currencyList">{{currency}}</option>
+    <input type="text" id="amountToConvert" name="amountToConvert" [(ngModel)]="amountToConvert"
+      (keyup)="convertCurrency()"
+        (change)="amountToConvert=$event.target.value" />
+    <select name="currencyList" (change)="convertCurrency('originalCurrency')" #originalCurrency>
+      <option *ngFor="let currency of currencyList">{{currency}}</option>
     </select>
   </div>
   <div>
     <div>Converted amount:</div>
-    <input #targetAmount="$event.target.value" type="text" id="convertedAmount" name="convertedAmount" [(ngModel)]="convertedAmount"
-      (change)="convertCurrency('targetCurrency', $event.target.value)" />
-    <select name="currencyList" (change)="convertCurrency('targetCurrency', targetAmount.value)" [value]="currencyList[1]">
-      <option #targetCurrency *ngFor="let currency of currencyList">{{currency}}</option>
+    <input type="text" id="convertedAmount" name="convertedAmount" [(ngModel)]="convertedAmount"
+      (keyup)="convertCurrency()"
+      (change)="convertCurrency=$event.target.value" />
+    <select name="currencyList" (change)="convertCurrency('targetCurrency')"
+      [value]="currencyList[1]" #targetCurrency>
+      <option *ngFor="let currency of currencyList">{{currency}}</option>
     </select>
   </div>
 </div>

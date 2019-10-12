@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ExchangeRateService } from './services/exchange-rate.service';
 
 @Component({
@@ -7,36 +7,35 @@ import { ExchangeRateService } from './services/exchange-rate.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  @ViewChild('originalCurrency', {static: false}) originalCurrency: ElementRef;
+  @ViewChild('targetCurrency', {static: false}) targetCurrency: ElementRef;
+
   title = 'home-depot';
 
   currencyList = ['CAD', 'USD', 'EUR'];
   amountToConvert = '0.00';
   convertedAmount = '0.00';
-  originalCurrency = this.currencyList[0];
-  targetCurrency = this.currencyList[1];
+  alertShown = false;
 
   constructor(private exchangeRate: ExchangeRateService) {
   }
 
   // Function used to convert the currency amount to desired currency
-  convertCurrency(type, value) {
-    const pattern = new RegExp(/[0-9]+.?[0-9]?[0-9]?/);
-    console.log(this.amountToConvert);
-    
-    if (!pattern.test(this.amountToConvert)) {
+  convertCurrency() {
+    const pattern = new RegExp(/^[0-9\.]+[0-9]?$/);
+    if (!pattern.test(this.amountToConvert) && this.amountToConvert) {
       alert('Please enter valid number.');
+      this.alertShown = true;
     } else {
-      if (type === 'originalCurrency') {
-        this.amountToConvert = value;
-      } else {
-        this.convertCurrency = value;
-      }
+      this.alertShown = false;
       console.log(this.amountToConvert, this.convertedAmount);
       this.exchangeRate.callExchangeRate().subscribe(data => {
         // adding base converter to the list
         data.rates['EUR'] = 1;
-        console.log(data.rates, data.rates[this.targetCurrency], data.rates[this.originalCurrency]);
-        this.convertedAmount = ((data.rates[this.targetCurrency]/data.rates[this.originalCurrency]) * parseInt(this.amountToConvert, 10))
+        console.log(data.rates, this.targetCurrency.nativeElement.value, this.originalCurrency.nativeElement.value, 
+          data.rates[this.targetCurrency.nativeElement.value], data.rates[this.originalCurrency.nativeElement.value]);
+        this.convertedAmount = ((data.rates[this.targetCurrency.nativeElement.value]/data.rates[this.originalCurrency.nativeElement.value]) * parseInt(this.amountToConvert, 10))
                                 .toFixed(2);
       })
     }
