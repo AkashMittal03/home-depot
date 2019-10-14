@@ -39,6 +39,9 @@ export class AppComponent implements OnInit {
         this.convertedAmount = ((data.rates[this.targetCurrency.nativeElement.value]
           /data.rates[this.originalCurrency.nativeElement.value]) * parseInt(this.amountToConvert, 10))
           .toFixed(2);
+          if (!this.amountToConvert) {
+            this.convertedAmount = '0.00';
+          }
       })
     }
   }
