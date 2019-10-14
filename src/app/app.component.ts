@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
         this.convertedAmount = ((data.rates[this.targetCurrency.nativeElement.value]
           /data.rates[this.originalCurrency.nativeElement.value]) * parseInt(this.amountToConvert, 10))
           .toFixed(2);
-          if (!this.amountToConvert) {
-            this.convertedAmount = '0.00';
-          }
+        if (!this.amountToConvert) {
+          this.convertedAmount = '0.00';
+        }
       })
     }
   }
@@ -50,6 +50,6 @@ export class AppComponent implements OnInit {
   showDisclaimerDetails() { 
     alert("This tool is used for currency conversion within CAD, USD, EUR currencies.\n" +
       "Usage: Please select the original currency and then choose your desired currency. Now, type in the required amount " +
-      "in first column to see the converted amount.");
+      "in first input field to see the converted amount.");
   } 
 }
