@@ -2,15 +2,11 @@ import * as fromCurrencyList from '../actions/currency-list.action';
 import { CurrencyList } from 'src/app/models/currency-list.model';
 
 export interface CurrencyListState {
-    data: CurrencyList,
-    loaded: boolean,
-    loading: boolean
+    data: CurrencyList
 }
 
 export const initialState = {
     data: Object.create({}),
-    loaded: false,
-    loading: false
 };
 
 export function reducer(
@@ -21,7 +17,6 @@ export function reducer(
         case fromCurrencyList.GET_CURRENCY_LIST: {
             return {
                 ...state,
-                loading: true,
             };
         }
 
@@ -29,24 +24,17 @@ export function reducer(
             const data = action.playload;
             return {
                 ...state,
-                loading: false,
-                loaded: true,
                 data
             };
         }
 
         case fromCurrencyList.GET_CURRENCY_LIST_FAIL: {
             return {
-                ...state,
-                loading: false,
-                loaded: false,
-                
+                ...state
             };
         }
     }
     return state;
 }
 
-export const getCurrentListLoading = (state: CurrencyListState) => state.loading;
-export const getCurrentListLoaded = (state: CurrencyListState) => state.loaded;
 export const getCurrentList = (state: CurrencyListState) => state.data;

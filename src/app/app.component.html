@@ -1,24 +1,26 @@
-<div>
+<div class="container">
   <div>
-    <label>Currency converter</label>
+    <label><b>Currency converter</b>  </label>
   </div>
-  <div>
-    <div>Type in amount and select currency:</div>
+  <br/>
+  <div class="mb-2">
+    <div class="mb-1">Type in amount and select currency:</div>
     <input type="text" id="amountToConvert" name="amountToConvert" [(ngModel)]="amountToConvert"
       (keyup)="convertCurrency()"
-        (change)="amountToConvert=$event.target.value" />
+        (change)="amountToConvert=$event.target.value" />&nbsp;
     <select name="currencyList" (change)="convertCurrency()" #originalCurrency>
       <option *ngFor="let currency of currencyList">{{currency}}</option>
     </select>
   </div>
   <div>
-    <div>Converted amount:</div>
+    <div class="mb-1">Converted amount:</div>
     <input type="text" id="convertedAmount" name="convertedAmount" [(ngModel)]="convertedAmount"
       (keyup)="convertCurrency()"
-      (change)="convertCurrency=$event.target.value" />
+      (change)="convertCurrency=$event.target.value" />&nbsp;
     <select name="currencyList" (change)="convertCurrency()"
       [value]="currencyList[1]" #targetCurrency>
       <option *ngFor="let currency of currencyList">{{currency}}</option>
     </select>
   </div>
+  <div class="mt-1 float-right" (click)="showDisclaimerDetails()"><a>Disclaimer</a></div>
 </div>

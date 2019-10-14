@@ -18,5 +18,3 @@ export const getCurrencyListState = createSelector(
 );
 
 export const getCurrentList = createSelector(getCurrencyListState, fromCurrencyList.getCurrentList);
-export const getCurrentListLoaded = createSelector(getCurrencyListState, fromCurrencyList.getCurrentListLoaded);
-export const getCurrentListLoading = createSelector(getCurrencyListState, fromCurrencyList.getCurrentListLoading);

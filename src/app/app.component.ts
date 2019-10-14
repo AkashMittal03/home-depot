@@ -42,4 +42,11 @@ export class AppComponent implements OnInit {
       })
     }
   }
+
+  // Function used to show modal on click of Disclaimer link
+  showDisclaimerDetails() { 
+    alert("This tool is used for currency conversion within CAD, USD, EUR currencies.\n" +
+      "Usage: Please select the original currency and then choose your desired currency. Now, type in the required amount " +
+      "in first column to see the converted amount.");
+  } 
 }
