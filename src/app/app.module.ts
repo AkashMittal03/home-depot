@@ -6,6 +6,9 @@ import { HttpClientModule  } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, effects } from '../app/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -16,8 +19,12 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     FormsModule,
     BrowserModule,
-    CommonModule,
-    HttpClientModule
+    CommonModule,   
+    HttpClientModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('app', reducers),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature(effects)
   ],
   providers: [],
   bootstrap: [AppComponent]
